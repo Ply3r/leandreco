@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+.hero {
+  color: white;
+  font-size: 4em;
+  font-weight: 600;
+  margin: 2vh;
+}
+
+body, #root {
+  width: 100vw;
+  background-color: #202124;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.all-cards-container {
+  margin-bottom: 15px;
+}
+
+.card-container {
+  display: flex;
+}
+
+.card {
+  border-radius: 10px;
+  color: white;
+  display: grid;
+  font-size: 1.5em;
+  height: 80px;
+  width: 80px;
+  margin: 5px;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.active {
+  border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.rigth {
+  background-color: #3aa394 !important;
+}
+
+.hasOne {
+  background-color: #D3AD69 !important;
+}
+
+.card-active {
+  border: 5px solid white;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.keyboard-bot {
+  width: 64px;
+  height: 78px;
+  color: white;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.keyboard-row-2 {
+  display: flex;
+}
+
+.keyboard-row-2 > div {
+  width: 740px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.keyboard-row-3 {
+  display: flex;
+}
+
+.keyboard-row-3 > div {
+  width: 640px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.keyboard-bot:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.keyboard-bot:disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.wrong-word {
+  position: absolute;
+  top: 10%;
+  padding: 5px 25px;
+  background-color: #D64550;
+  border-radius: 15px;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 600;
+}

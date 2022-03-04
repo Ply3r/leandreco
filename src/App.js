@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Cards from './components/Cards';
+import Keyboard from './components/Keyboard';
+import GameProvider from './provider/GameProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <h1 className='hero'>Leandreco</h1>
+      </div>
+      <GameProvider>
+        <Cards />
+        <Keyboard />
+      </GameProvider>
+    </>
   );
 }
 
