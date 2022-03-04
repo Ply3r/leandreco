@@ -9,7 +9,7 @@
 
 .hero {
   color: white;
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 600;
   margin: 2vh;
 }
@@ -20,6 +20,7 @@ body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .all-cards-container {
