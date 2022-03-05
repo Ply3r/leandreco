@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './css/cards.css'
+import './css/app.css';
+import './css/keyboard.css';
+import './css/cards.css';
 
 ReactDOM.render(
   <React.StrictMode>

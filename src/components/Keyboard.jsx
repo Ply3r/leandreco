@@ -60,6 +60,7 @@ const Keyboard = () => {
             ${!rigth && hasOne ? 'hasOne' : ''}
           ` }
           type="button"
+          key={ `kyb_${letter}` }
           disabled={ word.length === 5 || gameOver }
           onClick={ () => handleChange(letter) }
         >
@@ -95,8 +96,7 @@ const Keyboard = () => {
           { createKeys('ZXCVBNM') }
         </div>
         <button
-          style={ { 'width': '150px' } }
-          className="keyboard-bot enter"
+          className="keyboard-bot enter-bot"
           disabled={ word.length !== 5 || gameOver }
           onClick={ submit }
         >

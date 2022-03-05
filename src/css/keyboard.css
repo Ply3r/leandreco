@@ -1,0 +1,78 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.keyboard-bot {
+  width: 64px;
+  height: 78px;
+  color: white;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.enter-bot {
+  width: 150px !important;
+}
+
+.keyboard-row-2 {
+  display: flex;
+}
+
+.keyboard-row-2 > div {
+  width: 740px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.keyboard-row-3 {
+  display: flex;
+}
+
+.keyboard-row-3 > div {
+  width: 640px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.keyboard-bot:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.keyboard-bot:disabled {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 450px) {
+  .keyboard {
+    width: 100%;
+  }
+
+  .keyboard-bot {
+    width: 30px;
+    height: 63px;
+    margin: 2px;
+    font-size: 1.2em;
+  }
+
+  .keyboard-row-2 > div {
+    width: 330px;
+    margin-right: 2px;
+  }
+
+  .keyboard-row-3 > div {
+    width: 270px;
+    margin-right: 2px;
+  }
+
+  .enter-bot {
+    width: 83px !important;
+  }
+}

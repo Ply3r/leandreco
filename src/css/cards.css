@@ -1,28 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Poppins, sans-serif;
-}
-
-.hero {
-  color: white;
-  font-size: 3em;
-  font-weight: 600;
-  margin: 2vh;
-}
-
-body, #root {
-  width: 100vw;
-  background-color: #202124;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
-
 .all-cards-container {
   margin-bottom: 15px;
 }
@@ -59,54 +34,6 @@ body, #root {
   border: 5px solid white;
 }
 
-.keyboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.keyboard-bot {
-  width: 64px;
-  height: 78px;
-  color: white;
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
-  font-size: 1.5em;
-  font-weight: 600;
-}
-
-.keyboard-row-2 {
-  display: flex;
-}
-
-.keyboard-row-2 > div {
-  width: 740px;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 15px;
-}
-
-.keyboard-row-3 {
-  display: flex;
-}
-
-.keyboard-row-3 > div {
-  width: 640px;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 15px;
-}
-
-.keyboard-bot:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.keyboard-bot:disabled {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .wrong-word {
   position: absolute;
   top: 10%;
@@ -116,4 +43,12 @@ body, #root {
   color: white;
   font-size: 1.5em;
   font-weight: 600;
+}
+
+@media screen and (max-width: 450px) {
+  .card {
+    width: 60px;
+    height: 60px;
+    font-size: 1.2em;
+  }
 }
