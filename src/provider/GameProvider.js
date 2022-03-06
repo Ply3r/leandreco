@@ -5,8 +5,8 @@ import local from '../utils/localStorage.js';
 
 const GameProvider = ({ children }) => {
   const [gameStatus, setGameStatus] = useState('')
-  const [gameOver, setGameOver] = useState(false);
   const [rigthAnswer, setRigthAnswer] = useState('');
+  const [gameOver, setGameOver] = useState(false);
   const [word, setWord] = useState('');
   const [actualCard, setActualCard] = useState(0);
   const [cards, setCards] = useState([]);
@@ -16,11 +16,12 @@ const GameProvider = ({ children }) => {
       letter: '',
       hasOne: false,
       rigth: false,
+      wrong: false
     }));
 
     setGameOver(false);
 
-    setRigthAnswer(Word.getRandomWord(5, true))
+    setRigthAnswer(Word.getRandomWord(5))
     setCards(cardsArray);
   }
 
@@ -39,13 +40,20 @@ const GameProvider = ({ children }) => {
 
   const verifyWords = () => {
     const letters = word.split('');
+    const answerWithouAcents = rigthAnswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     
     const newArray = letters.map((letter, index) => {
       const regex = new RegExp(letter, 'gmi');
-      const rigth = letter.toLowerCase() === rigthAnswer[index];
-      const hasOne = regex.test(rigthAnswer);
+      const rigth = letter.toLowerCase() === answerWithouAcents[index];
+      const hasOne = regex.test(answerWithouAcents);
+      const wrong = !hasOne;
 
-      return { letter, hasOne, rigth }
+      return { 
+        letter: rigth ? rigthAnswer[index].toUpperCase() : letter, 
+        hasOne, 
+        rigth,
+        wrong
+      }
     });
 
     const teste = newArray.map((value, index) => {
@@ -65,6 +73,7 @@ const GameProvider = ({ children }) => {
     const allCorrect = teste.every(({ rigth }) => rigth)
     if (allCorrect) {
       local.handleRigth({ position: actualCard + 1 })
+      setGameStatus('winner')
       setGameOver(true)
     }
 
@@ -79,6 +88,7 @@ const GameProvider = ({ children }) => {
     verifyWords();
     if (newIndex > cardsLength - 1) {
       local.handleWrong();
+      setGameStatus('loser')
       setGameOver(true);
       return;
     }
@@ -105,6 +115,7 @@ const GameProvider = ({ children }) => {
     cards,
     gameOver,
     gameStatus,
+    rigthAnswer,
     enter,
     setWord,
     setActualCard

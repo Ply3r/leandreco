@@ -1,11 +1,12 @@
 const Card = ({ value, index, active }) => {
-  const elements = value.map(({ letter, rigth, hasOne }, i) => (
+  const elements = value.map(({ letter, rigth, hasOne, wrong }, i) => (
     <div 
       className={ `
         card
         ${active ? 'active' : ''}
         ${rigth ? 'rigth': ''}
         ${!rigth && hasOne ? 'hasOne' : ''}
+        ${wrong ? 'wrong' : ''}
       ` }
       key={`Card ${index} - ${letter}${i}` } 
     >

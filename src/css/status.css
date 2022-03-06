@@ -1,0 +1,160 @@
+.status {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #E5FCFF;
+  border-radius: 30px;
+  padding: 15px;
+
+  top: 10%;
+  width: 700px;
+
+  animation: aparecer 1s ease;
+}
+
+.status-header {
+  width: 100%;
+  height: 15%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.status-close {
+  display: grid;
+  place-items: center;
+  font-size: 1em;
+
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+
+  background-color: #D64550;
+  border-radius: 50%;
+  color: white;
+}
+
+.status-info-container {
+  width: 100%;
+  height: 85%;
+
+  display: flex;
+}
+
+.status-message {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.status-message h2 {
+  font-size: 1.8em;
+  text-align: center;
+  font-weight: 600;
+}
+
+.status-message h3 span {
+  margin-left: 5px;
+  font-weight: 600;
+  font-size: 1.2em;
+  color: #3aa394;
+}
+
+.status-icon {
+  display: grid;
+  place-items: center;
+
+  height: 80px;
+  font-size: 5em;
+
+  margin-bottom: 10px;
+}
+
+.icon-disapprove {
+  font-size: 3em;
+  color: #D64550;
+}
+
+.status-infos {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.status-infos h2 {
+  margin-bottom: 15px;
+}
+
+.status-infos h3 {
+  width: 90%;
+}
+
+.acerto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 5px;
+}
+
+.acerto > span {
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.acerto-container {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 30px;
+  margin-left: 5px;
+  display: flex;
+}
+
+.progress {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  padding-right: 5px;
+  align-items: center;
+
+  height: 100%;
+  background-color: #3aa394;
+}
+
+.progress-wrong {
+  background-color: #D64550;
+}
+
+@media screen and (max-width: 450px) {
+  .status {
+    width: 100%;
+  }
+
+  .status-info-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .status-info-container > div {
+    width: 100%;
+  }
+}
+

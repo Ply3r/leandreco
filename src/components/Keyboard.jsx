@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import gameContext from "../provider/GameContext";
+import { ImCross } from 'react-icons/im';
 import { RiDeleteBack2Line } from 'react-icons/ri';
 import axios from "axios";
 
@@ -52,12 +53,19 @@ const Keyboard = () => {
         return someRigth;
       });
 
+      const wrong = cards.some((value) => {
+        const someRigth = value.some(({ letter: currLetter, wrong }) => letter === currLetter && wrong)
+
+        return someRigth;
+      });
+
       return (
         <button
           className={ `
             keyboard-bot
             ${rigth ? 'rigth': ''}
             ${!rigth && hasOne ? 'hasOne' : ''}
+            ${wrong ? 'wrong' : ''}
           ` }
           type="button"
           key={ `kyb_${letter}` }
@@ -74,7 +82,7 @@ const Keyboard = () => {
 
   return (
     <>
-    { error && <p className="wrong-word">Palavra incorreta</p> }
+    { error && <p className="wrong-word">Palavra incorreta <ImCross /></p> }
     <div className="keyboard">
       <div>
         { createKeys('QWERTYUIOP') }

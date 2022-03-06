@@ -5,7 +5,9 @@ const createPlayer = () => {
       2: 0,
       3: 0,
       4: 0,
-      5: 0
+      5: 0,
+      6: 0,
+      7: 0,
     },
     vezesJogadas: 0,
     maiorSequencia: 0,
@@ -58,19 +60,19 @@ const handleWrong = () => {
   const {
     acertos,
     vezesJogadas,
-    sequenciaVitorias,
     maiorSequencia,
   } = player;
 
+  const newAcertos = { ...acertos, 7: acertos['7'] + 1 }
   const newVezesJogadas = vezesJogadas + 1
   const newPlayer = {
-    acertos,
+    acertos: newAcertos,
     vezesJogadas: newVezesJogadas,
-    sequenciaVitorias,
+    sequenciaVitorias: 0,
     maiorSequencia
   }
 
   localStorage.setItem('player', JSON.stringify(newPlayer))
 }
 
-export default { handleRigth, handleWrong };
+export default { getPlayer, handleRigth, handleWrong };
