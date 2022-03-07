@@ -79,13 +79,17 @@ const GameProvider = ({ children }) => {
 
     const newCards = cards.map((value, index) => index === actualCard ? teste : value)
     setCards(newCards);
+
+    return allCorrect;
   }
 
   const enter = () => {
     const cardsLength = cards.length;
     const newIndex = actualCard + 1;
 
-    verifyWords();
+    const winner = verifyWords();
+    if (winner) return;
+
     if (newIndex > cardsLength - 1) {
       local.handleWrong();
       setGameStatus('loser')
