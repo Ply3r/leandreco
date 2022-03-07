@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import gameContext from "../provider/GameContext";
 import { ImCross } from 'react-icons/im';
 import { RiDeleteBack2Line } from 'react-icons/ri';
+import { Word } from '@andsfonseca/palavras-pt-br';
 import axios from "axios";
 
 const Keyboard = () => {
@@ -22,9 +23,7 @@ const Keyboard = () => {
   }
 
   const submit = async () => {
-    const isCorrect = await axios.get(`https://significado.herokuapp.com/${word}`)
-      .then(() => true)
-      .catch(() => false)
+    const isCorrect = Word.checkValid(word.toLowerCase())
 
     if (isCorrect) {
       enter();
