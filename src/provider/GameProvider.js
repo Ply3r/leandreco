@@ -4,24 +4,33 @@ import local from '../utils/localStorage.js';
 import data from '../data';
 
 const GameProvider = ({ children }) => {
-  const [gameStatus, setGameStatus] = useState('')
-  const [rigthAnswer, setRigthAnswer] = useState('');
+  const [gameOptions, setGameOptions] = useState({
+    gameOver: false,
+    gameStatus: '',
+    length: 5,
+    rigthAnswer: ''
+  })
   const [word, setWord] = useState('');
-  const [gameOver, setGameOver] = useState(false);
   const [actualCard, setActualCard] = useState(0);
   const [cards, setCards] = useState([]);
 
   const createCards = () => {
-    const cardsArray = new Array(6).fill(new Array(5).fill({
+    const cardsArray = new Array(6).fill(new Array(gameOptions.length).fill({
       letter: '',
       hasOne: false,
       rigth: false,
       wrong: false
     }));
 
-    setGameOver(false);
-
-    setRigthAnswer(data.getRandomWord(5))
+    setGameOptions({
+      ...gameOptions,
+      gameOver: false,
+      gameStatus: '',
+      rigthAnswer: data.getRandomWord(gameOptions.length)
+    });
+    
+    setWord('');
+    setActualCard(0);
     setCards(cardsArray);
   }
 
@@ -39,9 +48,11 @@ const GameProvider = ({ children }) => {
   }
 
   const verifyWords = () => {
+    const { rigthAnswer } = gameOptions;
     const letters = word.split('');
+
     const answerWithouAcents = rigthAnswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    
+
     const newArray = letters.map((letter, index) => {
       const regex = new RegExp(letter, 'gmi');
       const rigth = letter.toLowerCase() === answerWithouAcents[index];
@@ -72,9 +83,8 @@ const GameProvider = ({ children }) => {
 
     const allCorrect = teste.every(({ rigth }) => rigth)
     if (allCorrect) {
-      local.handleRigth({ position: actualCard + 1 })
-      setGameStatus('winner')
-      setGameOver(true)
+      local.handleRigth({ position: actualCard + 1 });
+      setGameOptions({ ...gameOptions, gameStatus: 'winner', gameOver: true });
     }
 
     const newCards = cards.map((value, index) => index === actualCard ? teste : value)
@@ -92,12 +102,11 @@ const GameProvider = ({ children }) => {
 
     if (newIndex > cardsLength - 1) {
       local.handleWrong();
-      setGameStatus('loser')
-      setGameOver(true);
+      setGameOptions({ ...gameOptions, gameStatus: 'loser', gameOver: true });
       return;
     }
 
-    if (!gameOver) {
+    if (!gameOptions.gameOver) {
       setActualCard(newIndex);
       setWord('');
     };
@@ -113,16 +122,21 @@ const GameProvider = ({ children }) => {
     cards.length && modifyActualCard();
   }, [word])
 
+  useEffect(() => {
+    // Update
+    createCards();
+  }, [gameOptions.length])
+
   const value = {
     word,
     actualCard,
     cards,
-    gameOver,
-    gameStatus,
-    rigthAnswer,
+    gameOptions,
     enter,
     setWord,
-    setActualCard
+    setActualCard,
+    createCards,
+    setGameOptions
   }
 
   return (

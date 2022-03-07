@@ -6,7 +6,7 @@ import { FcApproval } from 'react-icons/fc';
 import Acertos from './Acertos';
 
 const Status = () => {
-  const { gameOver, gameStatus, rigthAnswer } = useContext(gameContext);
+  const { gameOptions } = useContext(gameContext);
   const [active, setActive] = useState(false);
   const [userInfo, setUserInfo] = useState();
 
@@ -17,8 +17,8 @@ const Status = () => {
 
   useEffect(() => {
     getUserInfo();
-    setActive(gameOver);
-  }, [gameOver])
+    setActive(gameOptions.gameOver);
+  }, [gameOptions])
 
   return active && (
     <div className="status">
@@ -32,13 +32,13 @@ const Status = () => {
       </div>
       <div className="status-info-container">
         <div className="status-message">
-          <div className={`status-icon ${gameStatus === 'winner' ? 'icon-approve' : 'icon-disapprove' }`}>
-            { gameStatus === 'winner' ? <FcApproval /> : <ImCross /> }
+          <div className={`status-icon ${gameOptions.gameStatus === 'winner' ? 'icon-approve' : 'icon-disapprove' }`}>
+            { gameOptions.gameStatus === 'winner' ? <FcApproval /> : <ImCross /> }
           </div>
-          <h2>{ gameStatus === 'winner' ? 'Mandou Bem!' : 'Boa sorte na próxima!' }</h2>
+          <h2>{ gameOptions.gameStatus === 'winner' ? 'Mandou Bem!' : 'Boa sorte na próxima!' }</h2>
           <h3>
             A palavra era
-            <span>{ rigthAnswer.toUpperCase() }</span>
+            <span>{ gameOptions.rigthAnswer.toUpperCase() }</span>
           </h3>
         </div>
         <div className='status-infos'>

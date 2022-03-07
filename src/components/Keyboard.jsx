@@ -6,11 +6,11 @@ import data from "../data";
 
 const Keyboard = () => {
   const [error, setError] = useState(false)
-  const { word, setWord, cards, enter, gameOver } = useContext(gameContext);
+  const { word, setWord, cards, enter, gameOptions } = useContext(gameContext);
 
   const handleChange = (letter) => {
     const newWord = word + letter;
-    if (newWord.length > 5) return;
+    if (newWord.length > gameOptions.length) return;
    
     setWord(newWord);
   }
@@ -22,7 +22,7 @@ const Keyboard = () => {
   }
 
   const submit = async () => {
-    const isCorrect = data.checkWord(word);
+    const isCorrect = data.checkWord(word, gameOptions.length);
 
     if (isCorrect) {
       enter();
@@ -67,7 +67,7 @@ const Keyboard = () => {
           ` }
           type="button"
           key={ `kyb_${letter}` }
-          disabled={ word.length === 5 || gameOver }
+          disabled={ word.length === gameOptions.length || gameOptions.gameOver }
           onClick={ () => handleChange(letter) }
         >
           { letter }
@@ -91,7 +91,7 @@ const Keyboard = () => {
         </div>
         <button
           className="keyboard-bot"
-          disabled={ gameOver }
+          disabled={ gameOptions.gameOver }
           onClick={ erase }
         >
           <RiDeleteBack2Line />
@@ -103,7 +103,7 @@ const Keyboard = () => {
         </div>
         <button
           className="keyboard-bot enter-bot"
-          disabled={ word.length !== 5 || gameOver }
+          disabled={ word.length !== gameOptions.length || gameOptions.gameOver }
           onClick={ submit }
         >
           ENTER

@@ -22,3 +22,61 @@ body, #root {
   align-items: center;
   overflow: hidden;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.config {
+  color: white;
+}
+
+.config select {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.config button {
+  background-color: #009AFE;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  font-size: 2em;
+  color: white;
+}
+
+@keyframes desc-aparecer {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.icon-desc {
+  position: absolute;
+  right: -100%;
+  bottom: -90%;
+
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-size: 15px;
+  animation: desc-aparecer 1.2s ease;
+}

@@ -7,7 +7,7 @@ const createPalavrasJson = () => {
   const onlyPopularWords = palavrasArray.filter((data) => {
     const [_word, popularity] = data.split(',');
 
-    return +popularity > 100000
+    return +popularity > 80000
   })
 
   const words = onlyPopularWords.map((data) => {
