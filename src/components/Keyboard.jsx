@@ -3,7 +3,6 @@ import gameContext from "../provider/GameContext";
 import { ImCross } from 'react-icons/im';
 import { RiDeleteBack2Line } from 'react-icons/ri';
 import { Word } from '@andsfonseca/palavras-pt-br';
-import axios from "axios";
 
 const Keyboard = () => {
   const [error, setError] = useState(false)
