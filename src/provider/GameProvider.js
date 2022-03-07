@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import gameContext from './GameContext';
-import { Word } from '@andsfonseca/palavras-pt-br';
 import local from '../utils/localStorage.js';
+import data from '../data';
 
 const GameProvider = ({ children }) => {
   const [gameStatus, setGameStatus] = useState('')
   const [rigthAnswer, setRigthAnswer] = useState('');
-  const [gameOver, setGameOver] = useState(false);
   const [word, setWord] = useState('');
+  const [gameOver, setGameOver] = useState(false);
   const [actualCard, setActualCard] = useState(0);
   const [cards, setCards] = useState([]);
 
@@ -21,7 +21,7 @@ const GameProvider = ({ children }) => {
 
     setGameOver(false);
 
-    setRigthAnswer(Word.getRandomWord(5))
+    setRigthAnswer(data.getRandomWord(5))
     setCards(cardsArray);
   }
 

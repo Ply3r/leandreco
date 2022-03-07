@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import gameContext from "../provider/GameContext";
 import { ImCross } from 'react-icons/im';
 import { RiDeleteBack2Line } from 'react-icons/ri';
-import { Word } from '@andsfonseca/palavras-pt-br';
+import data from "../data";
 
 const Keyboard = () => {
   const [error, setError] = useState(false)
@@ -22,7 +22,7 @@ const Keyboard = () => {
   }
 
   const submit = async () => {
-    const isCorrect = Word.checkValid(word.toLowerCase())
+    const isCorrect = data.checkWord(word);
 
     if (isCorrect) {
       enter();
