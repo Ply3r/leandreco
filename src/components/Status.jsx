@@ -9,16 +9,32 @@ const Status = () => {
   const { gameOptions } = useContext(gameContext);
   const [active, setActive] = useState(false);
   const [userInfo, setUserInfo] = useState();
+  const [percentage, setPercentage] = useState(0)
 
   const getUserInfo = () => {
     const user = local.getPlayer();
     setUserInfo(user);
   }
 
+  const getPercentage = () => {
+    const acertosArray = Object.entries(userInfo.acertos)
+    const vezesAcertadas = acertosArray.reduce((acc, [key, value]) => {
+      if (+key === 7) return acc;
+      return acc + value
+    }, 0)
+
+    const hold = vezesAcertadas ?  (vezesAcertadas * 100 ) / userInfo.vezesJogadas : 0
+    setPercentage(Math.round(hold))
+  }
+
   useEffect(() => {
     getUserInfo();
     setActive(gameOptions.gameOver);
   }, [gameOptions])
+
+  useEffect(() => {
+    userInfo && getPercentage();
+  }, [userInfo])
 
   return active && (
     <div className="status">
@@ -43,9 +59,24 @@ const Status = () => {
         </div>
         <div className='status-infos'>
           <h2>Estatística</h2>
-          <h3>Vezes jogadas: <span>{ userInfo.vezesJogadas }</span></h3>
-          <h3>Sequencia: <span>{ userInfo.sequenciaVitorias }</span></h3>
-          <h3>Maior sequencia: <span>{ userInfo.maiorSequencia }</span></h3>
+          <div className='status-game-infos'>
+            <div>
+              <h3>{ userInfo.vezesJogadas }</h3>
+              <h4>Vezes jogadas</h4>
+            </div>
+            <div>
+              <h3>{ percentage + '%' }</h3>
+              <h4>Porcentagem de vitória</h4>
+            </div>
+            <div>
+              <h3>{ userInfo.sequenciaVitorias }</h3>
+              <h4>Sequencia</h4>
+            </div>
+            <div>
+              <h3>{ userInfo.maiorSequencia }</h3>
+              <h4>Maior sequencia</h4>
+            </div>
+          </div>
           <Acertos userInfo={ userInfo } />
         </div>
       </div>

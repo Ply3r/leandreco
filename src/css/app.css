@@ -47,12 +47,63 @@ body, #root {
   font-weight: 500;
 }
 
+.doubts {
+  width: 500px;
+  padding: 25px;
+  border-radius: 30px;
+  position: absolute;
+  background-color: #292929;
+  top: 10%;
+  color: white;
+}
+
+.doubts a img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.doubts p {
+  margin-bottom: 15px;
+}
+
+a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 4px;
+}
+
+.doubts-span {
+  display: inline-block;
+
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+.doubts img {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.creditos {
+  position: absolute;
+  margin-left: 5px;
+  top: 0;
+  left: 0;
+  color: white;
+}
+
 .icon {
   position: relative;
   display: grid;
   place-items: center;
   cursor: pointer;
 
+  margin: 0 5px;
   font-size: 2em;
   color: white;
 }
@@ -70,13 +121,15 @@ body, #root {
 }
 
 .icon-desc {
+  box-sizing: content-box;
   position: absolute;
-  right: -100%;
-  bottom: -90%;
+  right: -200%;
+  bottom: -150%;
 
   background-color: black;
   border: 2px solid white;
   border-radius: 5px;
   font-size: 15px;
+  padding: 5px;
   animation: desc-aparecer 1.2s ease;
 }

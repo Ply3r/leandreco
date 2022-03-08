@@ -22,6 +22,26 @@
   align-items: center;
 }
 
+.status-game-infos {
+  display: flex;
+  width: 100%;
+}
+
+.status-game-infos > div {
+  flex-basis: 100%;
+}
+
+.status-game-infos h3 {
+  width: 100% !important;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.status-game-infos h4 {
+  font-size: 0.6em;
+  text-align: center;
+}
+
 .status-close {
   display: grid;
   place-items: center;
