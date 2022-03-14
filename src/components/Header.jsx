@@ -17,31 +17,32 @@ const Header = () => {
 
   return (
     <>
-      <p className="creditos">
-        Feito por <a href="https://github.com/Ply3r">Leandro Henrique</a>
-      </p>
       <div className="header">
-        <Icons 
-          callback={ () => setDoubts(!doubts) } 
-          description={ 'Dúvidas?' }
-          Icone={ AiFillQuestionCircle } 
-        />
-        <Icons 
-          callback={ createCards } 
-          description={ 'Recomeçar' }
-          Icone={ MdRestore } 
-        />
+        <div style={ { 'display': 'flex' } } >
+          <Icons 
+            callback={ () => setDoubts(!doubts) } 
+            description={ 'Dúvidas?' }
+            Icone={ AiFillQuestionCircle } 
+          />
+          <Icons 
+            callback={ createCards } 
+            description={ 'Recomeçar' }
+            Icone={ MdRestore } 
+          />
+        </div>
         <h1 className='hero'>Leandreco</h1>
-        <Icons 
-          callback={ () => setConfig(!config) } 
-          description={ 'Configurar' }
-          Icone={ BsGearFill } 
-        />
-        <Icons 
-          callback={ () => setInfo(!info) } 
-          description={ 'Informação' }
-          Icone={ AiOutlineInfoCircle } 
-        />
+        <div style={ { 'display': 'flex' } } >
+          <Icons 
+            callback={ () => setConfig(!config) } 
+            description={ 'Configurar' }
+            Icone={ BsGearFill } 
+          />
+          <Icons 
+            callback={ () => setInfo(!info) } 
+            description={ 'Informação' }
+            Icone={ AiOutlineInfoCircle } 
+          />
+        </div>
       </div>
       { config && <Config /> }
       { doubts && <Doubts /> }

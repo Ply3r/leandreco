@@ -24,9 +24,10 @@ body, #root {
 }
 
 .header {
+  width: 35vw;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .config {
@@ -132,4 +133,20 @@ a {
   font-size: 15px;
   padding: 5px;
   animation: desc-aparecer 1.2s ease;
+}
+
+
+@media screen and (max-width: 450px) {
+  .header {
+    width: 100vw;
+    justify-content: center;
+  }
+
+  .hero  {
+    font-size: 2em;
+  }
+
+  .doubts {
+    width: 100vw;
+  }
 }
