@@ -4,7 +4,7 @@ tive como objetivo ao fazer esse projeto entender e aprender como funciona esse 
 Eu utilizei os dados do repositório [pt-br](https://github.com/fserb/pt-br) que tem a licença MIT.
 
 ## Deploy
-[Link para o Site](https://leandreco.herokuapp.com)
+[Link para o Site](https://leandreco.netlify.app/)
 
 ## Preview
 | ![enter image description here](https://i.ibb.co/1myMJ7t/image.png) | ![enter image description here](https://i.ibb.co/gDTCnxV/image-1.png) |
