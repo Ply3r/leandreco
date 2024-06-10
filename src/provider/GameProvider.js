@@ -13,8 +13,76 @@ const GameProvider = ({ children }) => {
   const [word, setWord] = useState('');
   const [actualCard, setActualCard] = useState(0);
   const [cards, setCards] = useState([]);
+  const [mode, setMode] = useState('game');
+  const [suggestions, setSuggestions] = useState([]);
+  const [solverData, setSolverData] = useState([]);
 
-  const createCards = () => {
+  const getSuggestions = () => {
+    const words = data.getWords(gameOptions.length);
+
+    const suggestions = words.filter((word) => {
+      word = word.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      return solverData.every((rule) => {
+        switch (rule.type) {
+          case 'wrong':
+            return !word.includes(rule.letter);
+          case 'rigth':
+            return rule.exists_in.every((position) => word[position] === rule.letter);
+          case 'hasOne':
+            return word.includes(rule.letter) && rule.not_in.every((position) => word[position] !== rule.letter);
+          default:
+            break;
+        }
+      })
+    })
+
+    setSuggestions(suggestions);
+  }
+
+  const updateSolver = (cardIndex, letter, position, solverValue) => {
+    letter = letter.toLowerCase();
+    updateCard(cardIndex, position, solverValue);
+    const newSolverData = [...solverData];
+    const solverLetter = newSolverData.find((solver) => solver.letter === letter);
+
+    if (!solverLetter) {
+      const exists_in = solverValue === 'rigth' ? [position] : [];
+      const not_in = solverValue === 'hasOne' ? [position] : [];
+
+      newSolverData.push({
+        type: solverValue,
+        letter: letter,
+        exists_in,
+        not_in,
+        wrong: solverValue === 'wrong'
+      })
+
+      return setSolverData(newSolverData);
+    }
+
+    solverLetter.type = solverValue;
+    solverLetter.wrong = false;
+    if (solverValue === 'rigth') solverLetter.exists_in.push(position);
+    if (solverValue === 'hasOne') solverLetter.not_in.push(position);
+    if (solverValue === 'wrong') {
+      solverLetter.wrong = true;
+      solverLetter.exists_in = [];
+      solverLetter.not_in = [];
+    }
+
+    setSolverData(newSolverData);
+  }
+
+  const updateCard = (index, position, cardValue) => {
+    const newCards = [...cards];
+    newCards[index][position].wrong = false;
+    newCards[index][position].rigth = false;
+    newCards[index][position].hasOne = false;
+    newCards[index][position][cardValue] = true;
+    setCards(newCards);
+  }
+
+  const createCards = (isSolver=false) => {
     const cardsArray = new Array(6).fill(new Array(gameOptions.length).fill({
       letter: '',
       hasOne: false,
@@ -22,16 +90,19 @@ const GameProvider = ({ children }) => {
       wrong: false
     }));
 
+    const rigthAnswer = isSolver ? '' : data.getRandomWord(gameOptions.length);
+
     setGameOptions({
       ...gameOptions,
       gameOver: false,
       gameStatus: '',
-      rigthAnswer: data.getRandomWord(gameOptions.length)
+      rigthAnswer
     });
     
     setWord('');
     setActualCard(0);
     setCards(cardsArray);
+    setSolverData([]);
   }
 
   const modifyActualCard = () => {
@@ -107,6 +178,24 @@ const GameProvider = ({ children }) => {
     }
 
     if (!gameOptions.gameOver) {
+      if (mode === 'solver') {
+        const newSolverData = [...solverData];
+
+        word.split('').forEach((letter) => {
+          if (solverData.some((solver) => solver.letter === letter.toLowerCase())) return;
+
+          newSolverData.push({
+            type: 'wrong',
+            exists_in: [],
+            not_in: [],
+            letter: letter.toLowerCase(),
+            wrong: true
+          });
+        })
+
+        setSolverData(newSolverData);
+      }
+      
       setActualCard(newIndex);
       setWord('');
     };
@@ -127,16 +216,25 @@ const GameProvider = ({ children }) => {
     createCards();
   }, [gameOptions.length])
 
+  useEffect(getSuggestions, [solverData])
+
   const value = {
     word,
     actualCard,
     cards,
+    updateSolver,
+    setCards,
     gameOptions,
     enter,
     setWord,
     setActualCard,
     createCards,
-    setGameOptions
+    setGameOptions,
+    mode,
+    setMode,
+    solverData,
+    setSolverData,
+    suggestions
   }
 
   return (

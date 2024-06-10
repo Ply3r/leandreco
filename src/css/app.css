@@ -135,6 +135,81 @@ a {
   animation: desc-aparecer 1.2s ease;
 }
 
+.solver-card-value-container {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  position: absolute;
+}
+
+.solver-card {
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.solver-rigth {
+  background-color: #3aa394 !important;
+}
+
+.solver-hasOne {
+  background-color: #D3AD69 !important;
+}
+
+.solver-wrong {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.word-suggestions-container {
+  width: 350px;
+  height: 600px;
+  border: 3px solid white;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  border-radius: 30px;
+  color: white;
+  padding: 15px;
+}
+
+.words-suggestions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 95%;
+  overflow: auto;
+}
+
+.word-suggestion {
+  width: 100%;
+  padding: 8px 4px;
+  cursor: pointer;
+}
+
+.word-suggestion:hover {
+  background-color: rgba(255, 255, 255, 0.171);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dadada; 
+}
 
 @media screen and (max-width: 450px) {
   .header {

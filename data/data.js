@@ -51,4 +51,4 @@ const checkWord = (word, length) => {
   return isValid;
 }
 
-module.exports = { getRandomWord, checkWord }
+module.exports = { getWords, getRandomWord, checkWord }

@@ -10,6 +10,10 @@ const words = {
   7: length7
 }
 
+const getWords = (length) => {
+  return words[length];
+}
+
 const getRandomWord = (length) => {
   const array = words[length];
 
@@ -32,5 +36,5 @@ const checkWord = (word, length) => {
   return isValid;
 }
 
-const functions = { getRandomWord, checkWord }
+const functions = { getWords, getRandomWord, checkWord }
 export default functions;
