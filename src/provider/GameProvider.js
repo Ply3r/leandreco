@@ -21,18 +21,13 @@ const GameProvider = ({ children }) => {
     const words = data.getWords(gameOptions.length);
 
     const suggestions = words.filter((word) => {
-      word = word.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      word = word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
       return solverData.every((rule) => {
-        switch (rule.type) {
-          case 'wrong':
-            return !word.includes(rule.letter);
-          case 'rigth':
-            return rule.exists_in.every((position) => word[position] === rule.letter);
-          case 'hasOne':
-            return word.includes(rule.letter) && rule.not_in.every((position) => word[position] !== rule.letter);
-          default:
-            break;
-        }
+        if (rule.wrong) return !word.includes(rule.letter);
+
+        return rule.exists_in.every((position) => word[position] === rule.letter) && 
+               (word.includes(rule.letter) && rule.not_in.every((position) => word[position] !== rule.letter));
       })
     })
 
@@ -50,7 +45,6 @@ const GameProvider = ({ children }) => {
       const not_in = solverValue === 'hasOne' ? [position] : [];
 
       newSolverData.push({
-        type: solverValue,
         letter: letter,
         exists_in,
         not_in,
@@ -60,15 +54,12 @@ const GameProvider = ({ children }) => {
       return setSolverData(newSolverData);
     }
 
-    solverLetter.type = solverValue;
-    solverLetter.wrong = false;
+    solverLetter.exists_in = solverLetter.exists_in.filter((p) => p !== position);
+    solverLetter.not_in = solverLetter.not_in.filter((p) => p !== position);
+    solverLetter.wrong = solverValue === 'wrong';
+
     if (solverValue === 'rigth') solverLetter.exists_in.push(position);
     if (solverValue === 'hasOne') solverLetter.not_in.push(position);
-    if (solverValue === 'wrong') {
-      solverLetter.wrong = true;
-      solverLetter.exists_in = [];
-      solverLetter.not_in = [];
-    }
 
     setSolverData(newSolverData);
   }
@@ -185,7 +176,6 @@ const GameProvider = ({ children }) => {
           if (solverData.some((solver) => solver.letter === letter.toLowerCase())) return;
 
           newSolverData.push({
-            type: 'wrong',
             exists_in: [],
             not_in: [],
             letter: letter.toLowerCase(),
